@@ -188,6 +188,10 @@ def create_config(task_id, model_path, model_name, model_type, expected_repo_nam
                     "text_encoder_lr",
                     "min_snr_gamma",
                     "prior_loss_weight",
+                    "noise_offset",
+                    "seed",
+                    "max_grad_norm",
+                    "lr_warmup_steps",
                 ]:
                     if optional_key in lrs_settings:
                         config[optional_key] = lrs_settings[optional_key]

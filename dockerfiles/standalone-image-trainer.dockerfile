@@ -2,7 +2,7 @@ FROM diagonalge/kohya_latest:latest
 
 # Install git (required for pip installations from git repositories)
 RUN apt-get update && apt-get install -y git && rm -rf /var/lib/apt/lists/*
-COPY scripts/sd-script /app/sd-script
+COPY scripts/sd-script /app/sd-scripts
 
 # Install core dependencies from pyproject.toml
 RUN pip install aiohttp pydantic requests toml \

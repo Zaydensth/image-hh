@@ -176,22 +176,22 @@ def create_config(task_id, model_path, model_name, model_type, expected_repo_nam
 
             if lrs_settings:
                 for optional_key in [
-                    "max_train_steps",
+                    "max_grad_norm",
+                    "prior_loss_weight",
                     "max_train_epochs",
                     "train_batch_size",
-                    "network_dim",
+                    "max_train_steps",
                     "network_alpha",
-                    "network_args",
                     "optimizer_args",
-                    "optimizer_type",
                     "unet_lr",
                     "text_encoder_lr",
-                    "min_snr_gamma",
-                    "prior_loss_weight",
-                    "noise_offset",
-                    "seed",
-                    "max_grad_norm",
                     "lr_warmup_steps",
+                    "network_dropout",
+                    "min_snr_gamma",
+                    "seed",
+                    "noise_offset",
+                    "lr_scheduler",
+                    "save_every_n_epochs",
                 ]:
                     if optional_key in lrs_settings:
                         config[optional_key] = lrs_settings[optional_key]
@@ -342,7 +342,7 @@ def run_training(model_type, config_path):
     if is_ai_toolkit:
         training_command = [
             "python3",
-            "/app/run.py",
+            "/app/ai-toolkit/run.py",
             config_path
         ]
     else:
@@ -355,7 +355,7 @@ def run_training(model_type, config_path):
                 "--num_processes", "1",
                 "--num_machines", "1",
                 "--num_cpu_threads_per_process", "2",
-                f"/app/sd-scripts/{model_type}_train_network.py",
+                f"/app/sd-script/{model_type}_train_network.py",
                 "--config_file", config_path
             ]
         elif model_type == "flux":
